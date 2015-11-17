@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Fraction.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JUnitDemo&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">junitdemo</a> &gt; <span class="el_source">Fraction.java</span></div><h1>Fraction.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package junitdemo;
+
+import static java.lang.Math.abs;
+
+/**
+ *
+ * @author Le Vu Dai Yen &lt;daiyen@daiyen.info&gt;
+ */
+public class Fraction {
+
+    private int numerator;
+    private int denominator;
+
+<span class="fc" id="L19">    public Fraction(int numerator, int denominator) {</span>
+<span class="fc" id="L20">        this.numerator = numerator;</span>
+<span class="fc" id="L21">        this.denominator = denominator;</span>
+<span class="fc" id="L22">    }</span>
+
+    private int getGreatestDevisor(int a, int b) {
+<span class="fc bfc" id="L25" title="All 4 branches covered.">        while (a != 0 &amp;&amp; b != 0) // until either one of them is 0</span>
+        {
+<span class="fc" id="L27">            int c = b;</span>
+<span class="fc" id="L28">            b = a % b;</span>
+<span class="fc" id="L29">            a = c;</span>
+<span class="fc" id="L30">        }</span>
+<span class="fc" id="L31">        return a + b; // either one is 0, so return the non-zero value</span>
+
+    }
+
+<span class="fc" id="L35">    public Fraction() {</span>
+<span class="fc" id="L36">        this.numerator = 0;</span>
+<span class="fc" id="L37">        this.denominator = 1;</span>
+<span class="fc" id="L38">    }</span>
+
+    private void makeSimplest() {
+<span class="fc" id="L41">        int greatestDevisor = getGreatestDevisor(abs(numerator), abs(denominator));</span>
+<span class="fc" id="L42">        this.numerator = this.numerator / greatestDevisor;</span>
+<span class="fc" id="L43">        this.denominator = this.denominator / greatestDevisor;</span>
+<span class="fc" id="L44">    }</span>
+
+    public Fraction add(Fraction frac) {
+<span class="fc" id="L47">        Fraction result = new Fraction();</span>
+<span class="fc" id="L48">        result.numerator = this.numerator * frac.denominator + frac.numerator * this.denominator;</span>
+<span class="fc" id="L49">        result.denominator = this.denominator * frac.denominator;</span>
+<span class="fc" id="L50">        result.makeSimplest();</span>
+<span class="fc" id="L51">        return result;</span>
+    }
+
+    public Fraction subtract(Fraction frac) {
+<span class="fc" id="L55">        Fraction result = new Fraction();</span>
+<span class="fc" id="L56">        result.numerator = this.numerator * frac.denominator - frac.numerator * this.denominator;</span>
+<span class="fc" id="L57">        result.denominator = this.denominator * frac.denominator;</span>
+<span class="fc" id="L58">        result.makeSimplest();</span>
+<span class="fc" id="L59">        return result;</span>
+    }
+
+    public Fraction multiply(Fraction frac) {
+<span class="fc" id="L63">        Fraction result = new Fraction();</span>
+<span class="fc" id="L64">        result.numerator = this.numerator * frac.numerator;</span>
+<span class="fc" id="L65">        result.denominator = this.denominator * frac.denominator;</span>
+<span class="fc" id="L66">        result.makeSimplest();</span>
+<span class="fc" id="L67">        return result;</span>
+    }
+
+    public Fraction devide(Fraction frac) {
+<span class="fc" id="L71">        Fraction result = new Fraction();</span>
+<span class="fc" id="L72">        result.numerator = this.numerator * frac.denominator;</span>
+<span class="fc" id="L73">        result.denominator = this.denominator * frac.numerator;</span>
+<span class="fc" id="L74">        result.makeSimplest();</span>
+<span class="fc" id="L75">        return result;</span>
+    }
+    
+    @Override
+    public String toString()
+    {
+<span class="nc" id="L81">        String result = String.format(&quot;%1$d/%2$d&quot;, this.numerator, this.denominator);</span>
+<span class="nc" id="L82">        return result;</span>
+    }
+    /**
+     * @return the numerator
+     */
+    public int getNumerator() {
+<span class="fc" id="L88">        return numerator;</span>
+    }
+
+    /**
+     * @param numerator the numerator to set
+     */
+    public void setNumerator(int numerator) {
+<span class="fc" id="L95">        this.numerator = numerator;</span>
+<span class="fc" id="L96">    }</span>
+
+    /**
+     * @return the denominator
+     */
+    public int getDenominator() {
+<span class="fc" id="L102">        return denominator;</span>
+    }
+
+    /**
+     * @param denominator the denominator to set
+     */
+    public void setDenominator(int denominator) {
+<span class="fc" id="L109">        this.denominator = denominator;</span>
+<span class="fc" id="L110">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
